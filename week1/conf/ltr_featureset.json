@@ -12,6 +12,101 @@
             "name": "{{keywords}}"
           }
         }
+      },
+      {
+        "name": "name_phrase_match",
+        "params": [
+          "keywords"
+        ],
+        "template_language": "mustache",
+        "template": {
+          "match_phrase": {
+            "name": {
+              "query": "{{keywords}}",
+              "slop": 6
+            }
+          }
+        }
+      },
+      {
+        "name": "customerReviewAverage",
+        "template_language": "mustache",
+        "template": {
+          "function_score": {
+            "functions": [{
+                "field_value_factor": {
+                  "field": "customerReviewAverage",
+                  "missing": 2
+                }
+              }],
+            "query": {
+	      "match_all": {}
+            }
+          }
+        }
+      },
+      {
+        "name": "customerReviewCount",
+        "template_language": "mustache",
+        "template": {
+          "function_score": {
+            "functions": [
+              {
+                "field_value_factor": {
+                  "field": "customerReviewCount",
+                  "missing": 0
+                }
+              }
+            ],
+            "query": {
+              "match_all": {}
+            }
+          }
+	}
+      },
+      {
+        "name": "artist_name_phrase_match",
+        "params": [
+          "keywords"
+        ],
+        "template_language": "mustache",
+        "template": {
+          "match_phrase": {
+            "artistName": {
+              "query":"{{keywords}}",
+              "slop": 6
+            }
+          }
+        }
+      },
+      {
+        "name": "short_description_phrase_match",
+        "params": [
+          "keywords"
+        ],
+        "template": {
+          "match_phrase": {
+            "shortDescription": {
+              "query":"{{keywords}}",
+              "slop": 5
+            }
+          }
+        }
+      },
+      {
+        "name": "long_description_phrase_match",
+        "params": [
+          "keywords"
+        ],
+        "template_language": "mustache",
+        "template": {
+          "match_phrase": {
+            "longDescription": {
+              "query":"{{keywords}}",
+              "slop": 5
+            }
+          }
+        }
       }
     ]
   }
