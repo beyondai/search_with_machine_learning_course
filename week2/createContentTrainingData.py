@@ -4,8 +4,16 @@ import random
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+# Proprocessing imports
+import nltk
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize
+
+
 def transform_name(product_name):
-    # IMPLEMENT
+    ps = PorterStemmer()
+    tokens = word_tokenize(product_name)
+    product_name = ' '.join([ps.stem(w) for w in tokens])
     return product_name
 
 # Directory for product data
