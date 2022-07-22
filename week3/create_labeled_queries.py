@@ -73,13 +73,11 @@ i = 0
 
 while (True):
     #DEBUG
-    '''
     i += 1
     if i%100 == 0:
         print(i)
         print(freq)
     freq = count_freq(df)
-    '''
     # avoid the root category
     f0, c0 = freq.iloc[0].freq, freq.iloc[0].name # least frequency and category
     f1, c1 = freq.iloc[1].freq, freq.iloc[1].name # least frequency and category
@@ -87,7 +85,7 @@ while (True):
     if f > MIN_FREQ: # all categories >= minimum frequency requirement
         break
     p = parents_df[parents_df["category"] == c].iloc[0].parent #find parent category
-    df.loc[df["category"] == c, 'category'] = p # roll it up
+    df.loc[df["category"] == c, "category"] = p # roll it up
 
 # Create labels in fastText format.
 df['label'] = '__label__' + df['category']
